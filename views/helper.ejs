@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sockets :: Helper</title>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="http://10.2.145.42:8080/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>Helper</h1>
+    <ul>
+
+    </ul>
+
+    <script>
+        const socket = io.connect('http://10.2.145.42:3000/video');
+
+        socket.emit('register', {type: 'helper'});
+
+        socket.on('request', (data) => {
+            $('ul').append(`<li>${data.id} <button data-id='${data.id}'>Accept</button></li>`);
+        });
+
+        $('body').on('click', 'button', () => {
+            console.log('hi');
+           socket.emit('accept', {data: $(this).data('id')});
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sockets :: Helper</title>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="http://10.2.145.42:8080/socket.io/socket.io.js"></script>
+</head>
+    <body>
+        <h1>Blind</h1>
+
+        <button>Request</button>
+
+        <script>
+            const socket = io.connect('http://10.2.145.42:3000/video');
+
+            socket.emit('register', {type: 'blind'});
+
+            $('button').on('click', () => {
+                socket.emit('request');
+            });
+        </script>
+    </body>
+</html>
