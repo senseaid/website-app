@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Sockets :: Helper</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -9,18 +11,34 @@
     <script src="http://10.2.145.42:8080/socket.io/socket.io.js"></script>
 </head>
 <body>
-    <h1>Helper</h1>
-    <ul>
-
-    </ul>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <h1 class="display-2">Helper page</h1>
+                <hr class="my-4">
+                <p>Open requests</p>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
     <script>
-        const socket = io.connect('http://10.2.145.42:3000/video');
+        const socket = io.connect('http://10.2.144.127:3000/video');
 
         socket.emit('register', {type: 'helper'});
 
         socket.on('request', (data) => {
-            $('ul').append(`<li>${data.id} <button data-id='${data.id}'>Accept</button></li>`);
+            $('tbody').append(`<tr><th>${data.id}</th><td>Mark</td><td>Otto</td> <td><button type="button" class="btn btn-primary" data-id='${data.id}'>Accept</button></td></tr>`);
         });
 
         $('body').on('click', 'button', () => {
